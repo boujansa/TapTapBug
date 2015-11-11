@@ -1,0 +1,34 @@
+
+canvas {
+	display: block;
+    margin: auto;
+    
+}
+
+html {
+  text-align: center;
+}
+
+#pauseGame {
+		width: 90px;
+		height: 30px;
+		margin-left: 100px;
+		margin-right: 100px;
+		margin-bottom: 10px;
+}
+#exitGame {
+		width: 90px;
+		height: 30px;
+		margin-left: 100px;
+		margin-right: 100px;
+		margin-bottom: 10px;
+}
+#load {
+	margin-top: 100px;
+}
+#score{
+	margin-left: 100px;
+}
+#counter{
+	margin-right: 100px;
+}

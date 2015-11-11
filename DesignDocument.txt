@@ -1,0 +1,53 @@
+Internal Design:
+----------------
+
+Basically the game is based on two arrays: bugs array and food array. I repreatedly go through the bug array and update it to make sure each bug is going to the nearest food. Similarly, i repeatedly update the food array to make sure that everytime a bug reaches the food, the food get removed from the array and erased from the canvas. Everything else plays around those two arrays. 
+
+A tap is handeled by an event listened and is explained in the clickHandler function below
+
+The timer is updated repeatedly and is also explained in the timeCounter 
+
+The functiosn below explain how each step of the game is handeled:
+
+
+Functions:
+----------
+
+>init(): this is the function that gets called first when canvas is loaded. It first creates the food by calling foodCreate()
+	It also sets a bunch of time intervals that repeatedly call other functions
+
+>foodCreate(): This function randomly chooses 5 locations on the canvas and It makes sure that the food does not overlap 
+
+>drawFood(): once foodCreate() sets all the info, this function is called to do the actual drawing of food on the canvas
+
+>draw(): This function is called every 5 ms from inti() and it calls a bunch of other functions as well everytime it is called from init(). 
+	It also checks if the food has been eaten all (game_over == 1) in which case it just steps the timer and ends the game. Or it clears the canvas and draw the next frame of bugs as they move
+
+>checkFood(): this function checks if all the food has been eaten, in which case, it just stops the timer and exists the game
+
+>bugAttack(): this function is called randomly between 1-3 seconds and it creates a bug.
+	It randomly decides which kind of bug it is based on the table given in the assignment.
+
+>fetchFood(): this function is the brain of how the bugs move. It goes through the bugs of array, and for each bug, it checks which food is closed, how to get there, how to face it (angle) and also how avoid collision. It also checks if the bug has reached a food, in which case it marks the food as "eaten" so it gets erased from the array and canvas. This is where all the hard logic is.
+
+>drawBugs(): this functions is called to draw the bugs on the canvas. It goes through the bugs array and it calls bugDrawing to do the actual drawing
+
+>bugDrawing: this functions is given the array with all the information (such as angle, coordinates etc) and draws the bug and retates it to face the food.
+
+> pauseGame(): this is called when the pause button is pressed. It stops all the intervals that repeatedly calls functions so nothing will be changed. It changes the button to play and waits for it to be pressed again to move on
+
+
+>timeCounter(): this function is called every 5ms from init() and it checks if the counter expired, if not, it decreaments it. It checks which level we are in, if level one, it moves on to level two, otherwise it ends the game by displaying the game over window by calling th optionsWidnow()
+
+>stoptimer(): is this called when the user wants to exit the game or game is over, so that timer and intervals that call functions are finished
+
+>optionsWindow(): when this is called, it means we need to end the game. So we first fetch the highest score from local storage, display it to the player and also compare to see if he beat the highest score
+If he has a new high score, we store it on the local storage to overwrite the old one. It also dispays options to exiting the game or playing again
+
+>exitGame(): this is called when the player chooses to exit the game. It resets everything and laods the start page.
+
+>restartGame(): is player chooses to play again, this function is called and it basically resets eveything to 0 and reloads the canvas and starts the game
+
+>clickHandler: this function is called everytime a mouse click happends. So basically i have an event listener that detects mouse clicks and calls this function. 
+This function get the x and y coordinates of the click and goes through the bug array to check if any of the bugs is hit, if so, it marks the bug as dead and it gets removed from array and erased from the canvas
+

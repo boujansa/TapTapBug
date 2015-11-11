@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="style.css"/>
+	</head>
+	<body id="load">
+		<div>
+		<form>
+			<p>Level</p>
+  			<input type="radio" name="myLevel"   onChange="storeLevel()" value="1" checked> 1
+  			<input type="radio" name="myLevel"  onChange="storeLevel()" value="2"> 2
+  			
+		</form>
+		</div>
+		<br>
+		<span id="highScore"></span>
+		<br>
+		<br>
+		<a href="index.html"> <button>Start Game!</button></a>
+		<script type="text/javascript">
+  				if (sessionStorage.getItem("reloadPage")) {
+          			sessionStorage.removeItem("reloadPage");
+          			window.location.reload(true); 
+     			}
+  				var myLevel = document.getElementsByName("myLevel");
+  				var level =1;
+  				var highestScore=0;
+				for(var i = 0; i < myLevel.length; i++) {
+				   if(myLevel[i].checked == true) {
+				       level = myLevel[i].value;
+				       console.log(level);
+				   }
+				 }
+				 localStorage.setItem("level", level);
+				 if (typeof(Storage) !== "undefined") {
+					if(localStorage.getItem("HighScore") != null) {
+						highestScore = localStorage.getItem("HighScore");
+						document.getElementById("highScore").innerHTML="High Score: "+highestScore;
+					}
+					else{
+						document.getElementById("highScore").innerHTML="High Score: 0";
+					}
+				}
+				else{
+					console.log("sorry...");
+				}
+  			</script>
+		<script type="text/javascript" src="tapbug.js"></script>
+	</body>
+</html>
