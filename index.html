@@ -3,20 +3,49 @@
 	<head>
 		<link type="text/css" rel="stylesheet" href="style.css"/>
 	</head>
-	<body onload="init()">
-		
+	<body id="load">
+		<div>
+		<form>
+			<p>Level</p>
+  			<input type="radio" name="myLevel"   onChange="storeLevel()" value="1" checked> 1
+  			<input type="radio" name="myLevel"  onChange="storeLevel()" value="2"> 2
+  			
+		</form>
+		</div>
 		<br>
-		<button id="pauseGame" onclick="pauseGame()">Pause</button>
+		<span id="highScore"></span>
 		<br>
-		<span id="counter">Time: 60</span>
-		
-		<span id="score">Score: 0</span>
 		<br>
-		<canvas id="myCanvas" style="border:1px solid #c3c3c3;">
-			Your browser does not support the HTML5 canvas tag.
-		</canvas>
-		<br>
-		<button id="exit" onclick="exitGame()">Exit</button>
+		<a href="a2.html"> <button>Start Game!</button></a>
+		<script type="text/javascript">
+  				if (sessionStorage.getItem("reloadPage")) {
+          			sessionStorage.removeItem("reloadPage");
+          			window.location.reload(true); 
+     			}
+  				var myLevel = document.getElementsByName("myLevel");
+  				var level =1;
+  				var highestScore=0;
+				for(var i = 0; i < myLevel.length; i++) {
+				   if(myLevel[i].checked == true) {
+				       level = myLevel[i].value;
+				       console.log(level);
+				   }
+				 }
+				 localStorage.setItem("level", level);
+				 if (typeof(Storage) !== "undefined") {
+					if(localStorage.getItem("HighScore") != null) {
+						highestScore = localStorage.getItem("HighScore");
+						document.getElementById("highScore").innerHTML="High Score: "+highestScore;
+					}
+					else{
+						document.getElementById("highScore").innerHTML="High Score: 0";
+					}
+				}
+				else{
+					console.log("sorry...");
+				}
+  			</script>
 		<script type="text/javascript" src="tapbug.js"></script>
 	</body>
 </html>
+
